@@ -1,22 +1,35 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "careamics_n2v"
-## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: |
+  Noise2Void (N2V) is a self-supervised deep-learning algorithm for denoising image
+  data. It trains by randomly masking pixels in the input image and predicting their
+  masked value from the surrounding pixels. N2V relies on two assumptions: firstly,
+  that the underlying structures are smooths (i.e. continuous); secondly, that the
+  noise is pixel-wise independent.
+
+  This nf-core module allows for the use of a pre-trained model for inference; or
+  training a model and then using it for inference (the training data will be the same
+  as the data used during inference - this is a valid approach because the network is
+  not biased towards a ground-truth).
 keywords:
-  - sort
-  - example
-  - genomics
+  - denoising
+  - image_processing
+  - image_analysis
+  - careamics
 tools:
   - "careamics":
       ## TODO nf-core: Add a description and other details for the software below
-      description: ""
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
-      doi: ""
-      licence: 
-      identifier: 
+      description: |
+        CAREamics is a PyTorch library aimed at simplifying the use of Noise2Void and
+        its many variants and cousins (CARE, Noise2Noise, N2V2, P(P)N2V, HDN, muSplit
+        etc.)."
+      homepage: "https://github.com/CAREamics/careamics"
+      documentation: "https://careamics.github.io/"
+      tool_dev_url: "https://github.com/CAREamics/careamics"
+      doi: "" #TODO
+      licence: ["BSD-3-Clause license"]
+      identifier: #TODO
 
 ## TODO nf-core: Add a description of all of the variables used as input
 input:
@@ -30,7 +43,7 @@ input:
           - edam: "http://edamontology.org/format_25722"
           - edam: "http://edamontology.org/format_2573"
           - edam: "http://edamontology.org/format_3462"
-          
+
 
 ## TODO nf-core: Add a description of all of the variables used as output
 output:
@@ -45,7 +58,7 @@ output:
           - edam: "http://edamontology.org/format_25722"
           - edam: "http://edamontology.org/format_2573"
           - edam: "http://edamontology.org/format_3462"
-          
+
   - versions:
     - "versions.yml":
         type: file
