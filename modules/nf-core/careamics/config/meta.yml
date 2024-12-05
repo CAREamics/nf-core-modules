@@ -1,69 +1,61 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "careamics_config"
-## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: "Generates a configuration file for Careamics to be used for training and prediction in image restoration workflows."
 keywords:
-  - sort
-  - example
-  - genomics
+  - careamics
+  - image-processing
+  - image restoration
+  - microscopy
+  - deep-learning
 tools:
   - "careamics":
-      ## TODO nf-core: Add a description and other details for the software below
-      description: ""
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
-      doi: ""
-      licence: 
-      identifier: 
+      description: "Careamics is a deep learning-based image restoration library for microscopy data."
+      homepage: "https://careamics.github.io"
+      documentation: "https://github.com/CAREamics/careamics/releases/tag/v0.0.4.2"
+      tool_dev_url: "https://github.com/CAREamics/careamics"
+      doi: #tbd
+      licence: "BSD 3-Clause"
+      identifier: "careamics:config"
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
-  # Only when we have meta
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
-  
-  ## TODO nf-core: Delete / customise this example input
-    - bam:
-        type: file
-        description: Sorted BAM/CRAM/SAM file
-        pattern: "*.{bam,cram,sam}"
-        ontologies:
-          - edam: "http://edamontology.org/format_25722"
-          - edam: "http://edamontology.org/format_2573"
-          - edam: "http://edamontology.org/format_3462"
-          
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information.
+        (sample id) #fix
+  - dataset_dir:
+      type: directory
+      description: "Path to the dataset directory containing input images."
+  - config_file_name:
+      type: string
+      description: "Name of the output configuration file."
+  - algorithm:
+      type: string
+      description: "Algorithm to configure (e.g., Noise2Void or CARE)."
+  - output_dir:
+      type: directory
+      description: "Directory to save the generated configuration and results."
+  - params_map:
+      type: map
+      description: |
+        Dictionary of additional parameters specific to the algorithm.
+        Example: `{ 'patch_size': 64, 'batch_size': 32 }`
 
-## TODO nf-core: Add a description of all of the variables used as output
 output:
-  - bam:
-  #Only when we have meta
-    - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
-  ## TODO nf-core: Delete / customise this example output
-    - "*.bam":
-        type: file
-        description: Sorted BAM/CRAM/SAM file
-        pattern: "*.{bam,cram,sam}"
-        ontologies:
-          - edam: "http://edamontology.org/format_25722"
-          - edam: "http://edamontology.org/format_2573"
-          - edam: "http://edamontology.org/format_3462"
-          
+  - config:
+      type: file
+      description: "Generated configuration file for the specified Careamics algorithm."
+      pattern: "*.yaml"
+     
   - versions:
-    - "versions.yml":
-        type: file
-        description: File containing software versions
-        pattern: "versions.yml"
+      type: file
+      description: "File containing the versions of the software used in the module."
+      pattern: "versions.yml"
 
 authors:
   - "@diyasrivas"
+  - "@melisande-c"
 maintainers:
   - "@diyasrivas"
+  - "@melisande-c"
